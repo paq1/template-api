@@ -1,2 +1,2 @@
-pub mod pouet;
+pub mod {{aggregate_name}};
 pub mod helpers;
