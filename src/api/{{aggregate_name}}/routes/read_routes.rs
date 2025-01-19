@@ -5,10 +5,10 @@ use std::sync::Arc;
 use actix_web::web::Query;
 use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
 
-use crate::api::pouet::query::{from_pouet_query_to_query_repo, RegexWordQuery};
-use crate::core::pouet::data::events::PouetEvents;
-use crate::core::pouet::repositories::CustomPouetRepository;
-use crate::models::pouet::views::{PouetViewEvent, PouetViewState};
+use crate::api::{{aggregate_name}}::query::{from_{{aggregate_name}}_query_to_query_repo, {{aggregate_name | capitalize}}Query};
+use crate::core::{{aggregate_name}}::data::events::{{aggregate_name | capitalize}}Events;
+use crate::core::{{aggregate_name}}::repositories::Custom{{aggregate_name | capitalize}}Repository;
+use crate::models::{{aggregate_name}}::views::{{{aggregate_name | capitalize}}ViewEvent, {{aggregate_name | capitalize}}ViewState};
 use framework_cqrs_lib::cqrs::core::context::Context;
 use framework_cqrs_lib::cqrs::core::repositories::events::RepositoryEvents;
 use framework_cqrs_lib::cqrs::core::repositories::filter::{Expr, ExprGeneric, Filter, Operation};
@@ -26,17 +26,17 @@ use framework_cqrs_lib::cqrs::models::views::entities::EntityView;
     tag = "{{aggregate_name}}",
     path = "/{{aggregate_name}}",
     responses(
-        (status = 200, description = "fait ca", body = Paged<EntityView<RegexWordViewState>>)
+        (status = 200, description = "fait ca", body = Paged<EntityView<{{aggregate_name | capitalize}}ViewState>>)
     ),
     params(
-        RegexWordQuery
+        {{aggregate_name | capitalize}}Query
     )
 )]
 #[get("")]
-pub async fn fetch_many_pouet(
-    store: web::Data<Arc<dyn CustomPouetRepository>>,
+pub async fn fetch_many_{{aggregate_name}}(
+    store: web::Data<Arc<dyn Custom{{aggregate_name | capitalize}}Repository>>,
     http_error: web::Data<StandardHttpError>,
-    query: Query<RegexWordQuery>,
+    query: Query<{{aggregate_name | capitalize}}Query>,
     req: HttpRequest,
 ) -> impl Responder {
     let ctx: Context = Context::empty()
@@ -59,11 +59,11 @@ pub async fn fetch_many_pouet(
         ]));
 
     match store
-        .fetch_many(from_pouet_query_to_query_repo(query))
+        .fetch_many(from_{{aggregate_name}}_query_to_query_repo(query))
         .await
     {
         Ok(items) => {
-            let paged_view: Paged<EntityView<PouetViewState>> =
+            let paged_view: Paged<EntityView<{{aggregate_name | capitalize}}ViewState>> =
                 items.map(|entity| from_states_to_entity_view(entity, "{{aggregate_name}}".to_string(), &ctx));
 
             HttpResponse::Ok().json(paged_view.to_many_view(
@@ -83,14 +83,14 @@ pub async fn fetch_many_pouet(
         (
         status = 200,
         description = "Get the current state.",
-        body = RegexWordStates
+        body = {{aggregate_name | capitalize}}States
         )
     )
 )]
 #[get("/{entity_id}")]
-pub async fn fetch_one_pouet(
+pub async fn fetch_one_{{aggregate_name}}(
     path: web::Path<String>,
-    store: web::Data<Arc<dyn CustomPouetRepository>>,
+    store: web::Data<Arc<dyn Custom{{aggregate_name | capitalize}}Repository>>,
     http_error: web::Data<StandardHttpError>,
     req: HttpRequest,
 ) -> impl Responder {
@@ -116,23 +116,23 @@ pub async fn fetch_one_pouet(
         (
         status = 200,
         description = "Get the all events ",
-        body = RegexWordView
+        body = {{aggregate_name | capitalize}}View
         )
     ),
     params(
-        RegexWordQuery
+        {{aggregate_name | capitalize}}Query
     )
 )]
 #[get("/{entity_id}/events")]
-pub async fn fetch_pouet_events(
+pub async fn fetch_{{aggregate_name}}_events(
     path: web::Path<String>,
-    journal: web::Data<Arc<dyn RepositoryEvents<PouetEvents, String>>>,
+    journal: web::Data<Arc<dyn RepositoryEvents<{{aggregate_name | capitalize}}Events, String>>>,
     http_error: web::Data<StandardHttpError>,
-    query: Query<RegexWordQuery>,
+    query: Query<{{aggregate_name | capitalize}}Query>,
     req: HttpRequest,
 ) -> impl Responder {
     let id = path.into_inner();
-    let query_core: QueryCore = from_pouet_query_to_query_repo(query.clone());
+    let query_core: QueryCore = from_{{aggregate_name}}_query_to_query_repo(query.clone());
 
     let ctx: Context = Context::empty()
         .decore_with_http_header(&req)
@@ -188,14 +188,14 @@ pub async fn fetch_pouet_events(
         (
         status = 200,
         description = "Get event.",
-        body = DataWrapperView < EventView < RegexWordViewEvent >>
+        body = DataWrapperView < EventView < {{aggregate_name | capitalize}}ViewEvent >>
         )
     )
 )]
 #[get("/{entity_id}/events/{event_id}")]
-pub async fn fetch_one_pouet_event(
+pub async fn fetch_one_{{aggregate_name}}_event(
     path: web::Path<(String, String)>,
-    journal: web::Data<Arc<dyn RepositoryEvents<PouetEvents, String>>>,
+    journal: web::Data<Arc<dyn RepositoryEvents<{{aggregate_name | capitalize}}Events, String>>>,
     http_error: web::Data<StandardHttpError>,
     req: HttpRequest,
 ) -> impl Responder {
@@ -206,7 +206,7 @@ pub async fn fetch_one_pouet_event(
     match journal.fetch_one(&event_id).await {
         Ok(maybe_event) => match maybe_event {
             Some(event) => {
-                let view = from_entity_event_to_view::<PouetEvents, PouetViewEvent>(
+                let view = from_entity_event_to_view::<{{aggregate_name | capitalize}}Events, {{aggregate_name | capitalize}}ViewEvent>(
                     event,
                     "{{aggregate_name}}".to_string(),
                     "urn:api:{{aggregate_name}}:{{aggregate_name}}".to_string(),

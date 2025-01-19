@@ -6,12 +6,12 @@ use framework_cqrs_lib::cqrs::infra::api_key::component::ApiKeyComponent;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
-use api::pouet::routes::read_routes::{fetch_many_pouet, fetch_one_pouet};
-use api::pouet::routes::write_routes::insert_one_pouet;
+use api::{{aggregate_name}}::routes::read_routes::{fetch_many_{{aggregate_name}}, fetch_one_{{aggregate_name}}};
+use api::{{aggregate_name}}::routes::write_routes::insert_one_{{aggregate_name}};
 
-use crate::api::pouet::pouet_component::RegexWordComponent;
-use crate::api::pouet::routes::exemple_wit_api_key_routes::exemple_api_key;
-use crate::api::pouet::routes::read_routes::{fetch_pouet_events, fetch_one_pouet_event};
+use crate::api::{{aggregate_name}}::{{aggregate_name}}_component::{{aggregate_name | capitalize}}Component;
+use crate::api::{{aggregate_name}}::routes::exemple_wit_api_key_routes::exemple_api_key;
+use crate::api::{{aggregate_name}}::routes::read_routes::{fetch_{{aggregate_name}}_events, fetch_one_{{aggregate_name}}_event};
 use crate::api::swagger::ApiDoc;
 use framework_cqrs_lib::cqrs::infra::authentication::AuthenticationComponent;
 
@@ -36,7 +36,7 @@ async fn main() -> std::io::Result<()> {
     ).await);
 
     // {{aggregate_name}} aggregat
-    let regexword_component = RegexWordComponent::new(&authentication_component.clone()).await;
+    let {{aggregate_name}}_component = {{aggregate_name | capitalize}}Component::new(&authentication_component.clone()).await;
 
     let openapi = ApiDoc::openapi();
     let api_address = std::env::var("API_ADDRESS").unwrap();
@@ -62,21 +62,21 @@ async fn main() -> std::io::Result<()> {
             // {{aggregate_name}} services
             .service(
                 web::scope("/{{aggregate_name}}")
-                    .service(fetch_one_pouet)
-                    .service(fetch_one_pouet_event)
-                    .service(fetch_many_pouet)
-                    .service(fetch_pouet_events)
-                    .service(insert_one_pouet)
+                    .service(fetch_one_{{aggregate_name}})
+                    .service(fetch_one_{{aggregate_name}}_event)
+                    .service(fetch_many_{{aggregate_name}})
+                    .service(fetch_{{aggregate_name}}_events)
+                    .service(insert_one_{{aggregate_name}})
                     .service(exemple_api_key)
-                    .app_data(web::Data::new(Arc::clone(&regexword_component.engine)))
+                    .app_data(web::Data::new(Arc::clone(&{{aggregate_name}}_component.engine)))
                     .app_data(
-                        web::Data::new(Arc::clone(&regexword_component.store))
+                        web::Data::new(Arc::clone(&{{aggregate_name}}_component.store))
                     )
                     .app_data(
-                        web::Data::new(Arc::clone(&regexword_component.journal))
+                        web::Data::new(Arc::clone(&{{aggregate_name}}_component.journal))
                     )
                     .app_data(
-                        web::Data::new(Arc::clone(&regexword_component.service))
+                        web::Data::new(Arc::clone(&{{aggregate_name}}_component.service))
                     )
                     .app_data(
                         web::Data::new(api_key_component.service.clone())

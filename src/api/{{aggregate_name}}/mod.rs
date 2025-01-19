@@ -1,0 +1,9 @@
+pub mod {{aggregate_name}}_mongo_dao;
+pub mod {{aggregate_name}}_dbo;
+pub mod services;
+pub mod {{aggregate_name}}_mongo_repository;
+pub mod {{aggregate_name}}_event_mongo_repository;
+pub mod mappers;
+pub mod routes;
+pub mod query;
+pub mod {{aggregate_name}}_component;

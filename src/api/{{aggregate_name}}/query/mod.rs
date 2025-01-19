@@ -7,14 +7,14 @@ use framework_cqrs_lib::cqrs::core::repositories::query::PaginationDef;
 
 
 #[derive(Serialize, Deserialize, IntoParams, Debug, Clone)]
-pub struct RegexWordQuery {
+pub struct {{aggregate_name | capitalize}}Query {
     #[serde(rename = "page[number]")]
     pub number: Option<usize>,
     #[serde(rename = "page[size]")]
     pub size: Option<usize>,
 }
 
-pub fn from_pouet_query_to_query_repo(q: Query<RegexWordQuery>) -> framework_cqrs_lib::cqrs::core::repositories::query::Query {
+pub fn from_{{aggregate_name}}_query_to_query_repo(q: Query<{{aggregate_name | capitalize}}Query>) -> framework_cqrs_lib::cqrs::core::repositories::query::Query {
     let size = q.size.unwrap_or(10);
     let number = q.number.unwrap_or(0);
 

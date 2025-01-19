@@ -2,11 +2,11 @@ use crate::core::{{aggregate_name}}::data::events::{{aggregate_name | capitalize
 use crate::core::{{aggregate_name}}::data::states::{{aggregate_name | capitalize}}States;
 use framework_cqrs_lib::cqrs::core::reducer::Reducer;
 
-pub struct RegexWordReducer {
+pub struct {{aggregate_name | capitalize}}Reducer {
     pub underlying: Reducer<{{aggregate_name | capitalize}}Events, {{aggregate_name | capitalize}}States>,
 }
 
-impl RegexWordReducer {
+impl {{aggregate_name | capitalize}}Reducer {
     pub fn new() -> Self {
         Self {
             underlying: Reducer {
