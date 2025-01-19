@@ -2,5 +2,43 @@
 name = "{{project-name}}"
 version = "0.1.0"
 edition = "2021"
+default-run = "{{project-name}}"
+
+[target.x86_64-unknown-linux-musl.dependencies]
+openssl-sys = "0.9.66"
 
 [dependencies]
+#### basics deps
+async-trait = "0.1.80"
+futures = "0.3.30"
+chrono = { version = "0.4.38", features = ["serde"] }
+chrono-tz = "0.10.0"
+dotenv = "0.15.0"
+log = "0.4.22"
+env_logger = "0.11.5"
+tokio = { version = "1.40.0", features = ["full"] }
+uuid = {version = "1.9.1", features = ["v4", "fast-rng", "macro-diagnostics"]}
+
+#### cache deps
+moka = { version = "0.12", features = ["future"] }
+
+#### security deps
+jsonwebtoken = "9.3.0"
+passwords = { version = "3.1.16", features = ["crypto", "common-password"]}
+
+#### servers http deps
+actix-web = { version = "4" }
+actix-cors = "0.7.0"
+framework-cqrs-lib = "0.5.9"
+reqwest = { version = "0.12", features = ["json"] }
+
+#### serialization deserialization deps
+serde = { version = "1.0.203", features = ["derive"] }
+serde_json = "1.0.118"
+
+#### dbs deps
+mongodb = { version = "3.0.0", features = ["sync"]}
+
+#### openapi deps
+utoipa = { version = "4.2.3", features = ["actix_extras", "chrono"] }
+utoipa-swagger-ui = { version = "6.0.0", features = ["actix-web"] }
