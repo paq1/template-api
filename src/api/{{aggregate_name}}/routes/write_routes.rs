@@ -2,7 +2,10 @@ use std::sync::Arc;
 
 use crate::core::{{aggregate_name}}::data::events::{{aggregate_name | capitalize}}Events;
 use crate::core::{{aggregate_name}}::data::states::{{aggregate_name | capitalize}}States;
-use crate::models::{{aggregate_name}}::commands::{{{aggregate_name | capitalize}}Commands, Create{{aggregate_name | capitalize}}Command};
+use crate::models::{{aggregate_name}}::commands::{
+  {{aggregate_name | capitalize}}Commands,
+  Create{{aggregate_name | capitalize}}Command
+};
 use crate::models::{{aggregate_name}}::views::{{aggregate_name | capitalize}}ViewEvent;
 use actix_web::{post, web, Responder};
 use framework_cqrs_lib::cqrs::core::context::Context;

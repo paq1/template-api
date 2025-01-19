@@ -1,7 +1,10 @@
 use async_trait::async_trait;
 use std::sync::Arc;
 
-use crate::core::{{aggregate_name}}::data::events::{{{aggregate_name | capitalize}}Created, {{aggregate_name | capitalize}}Events};
+use crate::core::{{aggregate_name}}::data::events::{
+  {{aggregate_name | capitalize}}Created,
+  {{aggregate_name | capitalize}}Events
+};
 use crate::core::{{aggregate_name}}::data::{{aggregate_name}}_data::{{aggregate_name | capitalize}}Data;
 use crate::core::{{aggregate_name}}::data::states::{{aggregate_name | capitalize}}States;
 use crate::core::{{aggregate_name}}::services::rules::{{aggregate_name | capitalize}}Rules;

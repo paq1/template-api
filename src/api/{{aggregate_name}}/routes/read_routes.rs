@@ -8,7 +8,10 @@ use actix_web::{get, web, HttpRequest, HttpResponse, Responder};
 use crate::api::{{aggregate_name}}::query::{from_{{aggregate_name}}_query_to_query_repo, {{aggregate_name | capitalize}}Query};
 use crate::core::{{aggregate_name}}::data::events::{{aggregate_name | capitalize}}Events;
 use crate::core::{{aggregate_name}}::repositories::Custom{{aggregate_name | capitalize}}Repository;
-use crate::models::{{aggregate_name}}::views::{{{aggregate_name | capitalize}}ViewEvent, {{aggregate_name | capitalize}}ViewState};
+use crate::models::{{aggregate_name}}::views::{
+  {{aggregate_name | capitalize}}ViewEvent,
+  {{aggregate_name | capitalize}}ViewState
+};
 use framework_cqrs_lib::cqrs::core::context::Context;
 use framework_cqrs_lib::cqrs::core::repositories::events::RepositoryEvents;
 use framework_cqrs_lib::cqrs::core::repositories::filter::{Expr, ExprGeneric, Filter, Operation};

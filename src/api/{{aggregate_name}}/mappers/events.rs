@@ -1,5 +1,12 @@
-use crate::api::{{aggregate_name}}::{{aggregate_name}}_dbo::{{{aggregate_name | capitalize}}CreatedDbo, {{aggregate_name | capitalize}}DataDbo, {{aggregate_name | capitalize}}DboEvent};
-use crate::core::{{aggregate_name}}::data::events::{{{aggregate_name | capitalize}}Created, {{aggregate_name | capitalize}}Events};
+use crate::api::{{aggregate_name}}::{{aggregate_name}}_dbo::{
+  {{aggregate_name | capitalize}}CreatedDbo,
+  {{aggregate_name | capitalize}}DataDbo,
+  {{aggregate_name | capitalize}}DboEvent
+};
+use crate::core::{{aggregate_name}}::data::events::{
+  {{aggregate_name | capitalize}}Created,
+  {{aggregate_name | capitalize}}Events
+};
 use framework_cqrs_lib::cqrs::core::data::EntityEvent;
 use framework_cqrs_lib::cqrs::infra::daos::dbos::EventDBO;
 

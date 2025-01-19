@@ -1,7 +1,10 @@
 use crate::core::{{aggregate_name}}::data::events::{{aggregate_name | capitalize}}Events;
 use crate::core::{{aggregate_name}}::data::{{aggregate_name}}_data::{{aggregate_name | capitalize}}Data;
 use crate::core::{{aggregate_name}}::data::states::{{aggregate_name | capitalize}}States;
-use crate::models::{{aggregate_name}}::views::{{{aggregate_name | capitalize}}DataView, {{aggregate_name | capitalize}}View};
+use crate::models::{{aggregate_name}}::views::{
+  {{aggregate_name | capitalize}}DataView,
+  {{aggregate_name | capitalize}}View
+};
 use framework_cqrs_lib::cqrs::models::jsonapi::CanGetTypee;
 
 #[derive(Clone, Debug)]

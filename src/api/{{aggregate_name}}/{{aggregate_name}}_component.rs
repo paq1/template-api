@@ -1,6 +1,12 @@
-use crate::api::{{aggregate_name}}::{{aggregate_name}}_dbo::{{{aggregate_name | capitalize}}DboEvent, {{aggregate_name | capitalize}}DboState};
+use crate::api::{{aggregate_name}}::{{aggregate_name}}_dbo::{
+  {{aggregate_name | capitalize}}DboEvent,
+  {{aggregate_name | capitalize}}DboState
+};
 use crate::api::{{aggregate_name}}::{{aggregate_name}}_event_mongo_repository::{{aggregate_name | capitalize}}EventMongoRepository;
-use crate::api::{{aggregate_name}}::{{aggregate_name}}_mongo_dao::{{{aggregate_name | capitalize}}EventMongoDAO, {{aggregate_name | capitalize}}MongoDAO};
+use crate::api::{{aggregate_name}}::{{aggregate_name}}_mongo_dao::{
+  {{aggregate_name | capitalize}}EventMongoDAO,
+  {{aggregate_name | capitalize}}MongoDAO
+};
 use crate::api::{{aggregate_name}}::{{aggregate_name}}_mongo_repository::Mongo{{aggregate_name | capitalize}}Repository;
 use crate::api::{{aggregate_name}}::services::rules::RulesImpl;
 
