@@ -4,10 +4,6 @@ version = "0.1.0"
 edition = "2021"
 default-run = "{{project-name}}"
 
-# Liste des variables dynamiques
-[placeholders]
-aggregate_name = { type = "string", prompt = "Nom de l'agrégat", default = "pouet" }
-
 
 [target.x86_64-unknown-linux-musl.dependencies]
 openssl-sys = "0.9.66"
