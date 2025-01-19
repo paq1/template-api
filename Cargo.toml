@@ -7,6 +7,13 @@ default-run = "{{project-name}}"
 [target.x86_64-unknown-linux-musl.dependencies]
 openssl-sys = "0.9.66"
 
+[template]
+# Liste des variables dynamiques
+variables = [
+    { name = "project-name", prompt = "Nom du projet" },
+    { name = "aggregate_name", prompt = "Nom de l'agrégat" },
+]
+
 [dependencies]
 #### basics deps
 async-trait = "0.1.80"
